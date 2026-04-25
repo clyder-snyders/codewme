@@ -1,5 +1,6 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
+import Layout from "@/components/Layout";
 
 /**
  * Design: Warm Editorial
@@ -58,7 +59,7 @@ export default function Projects() {
   const others = PROJECTS.filter((p) => !p.featured);
 
   return (
-    <div className="min-h-screen bg-background">
+    <Layout>
       {/* Header */}
       <section className="container-x pt-12 md:pt-20 pb-12 md:pb-16">
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all mb-8">
@@ -164,6 +165,6 @@ export default function Projects() {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 }

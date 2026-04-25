@@ -1,5 +1,6 @@
 import { ArrowRight, Github, Instagram, Mail, Sparkles } from "lucide-react";
 import { Link } from "wouter";
+import Layout from "@/components/Layout";
 
 /**
  * Design: Warm Editorial
@@ -36,7 +37,7 @@ const HIGHLIGHTS = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <Layout>
       {/* HERO SECTION */}
       <section className="relative overflow-hidden pt-12 md:pt-20 lg:pt-28 pb-24 md:pb-32">
         {/* Decorative gradient blobs */}
@@ -147,7 +148,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Portrait placeholder */}
+              {/* Portrait card */}
           <div className="md:col-span-5 lg:col-span-5">
             <div
               className="relative mx-auto max-w-md md:max-w-none animate-fade-up"
@@ -162,12 +163,13 @@ export default function Home() {
                 }}
               />
               <div className="relative overflow-hidden rounded-[2rem] border border-border bg-surface-elevated shadow-lg">
-                <div className="aspect-[4/5] bg-gradient-to-br from-brand/10 to-gold/10 flex items-center justify-center">
-                  <div className="text-center">
-                    <Sparkles className="h-12 w-12 text-brand/40 mx-auto mb-4" />
-                    <p className="text-sm text-ink-soft">Portrait image</p>
-                  </div>
-                </div>
+                <img
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663452447906/oN63drPHpvEQvbUAiMNbHR/clyde-portrait-Bb85jFFHtSe7ubiDixD8yf.webp"
+                  alt="Clyde Snyders - Student, Coder, Robotics Builder"
+                  width={1088}
+                  height={1360}
+                  className="aspect-[4/5] h-full w-full object-cover"
+                />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-white backdrop-blur-md">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-widest opacity-80">
@@ -283,6 +285,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 }

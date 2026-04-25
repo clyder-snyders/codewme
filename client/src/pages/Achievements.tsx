@@ -1,5 +1,6 @@
 import { ArrowRight, Award, Trophy } from "lucide-react";
 import { Link } from "wouter";
+import Layout from "@/components/Layout";
 
 /**
  * Design: Warm Editorial
@@ -61,7 +62,7 @@ const ACHIEVEMENTS = [
 
 export default function Achievements() {
   return (
-    <div className="min-h-screen bg-background">
+    <Layout>
       {/* Header */}
       <section className="container-x pt-12 md:pt-20 pb-12 md:pb-16">
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all mb-8">
@@ -182,6 +183,6 @@ export default function Achievements() {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 }

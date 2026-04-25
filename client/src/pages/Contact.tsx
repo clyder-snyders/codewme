@@ -1,6 +1,7 @@
 import { ArrowRight, Mail, MessageSquare, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { useState } from "react";
+import Layout from "@/components/Layout";
 
 /**
  * Design: Warm Editorial
@@ -34,7 +35,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <Layout>
       {/* Header */}
       <section className="container-x pt-12 md:pt-20 pb-12 md:pb-16">
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all mb-8">
@@ -210,6 +211,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 }
