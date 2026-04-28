@@ -1,6 +1,8 @@
 import { ArrowRight, Github, Instagram, Mail, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
+import Gallery from "@/components/Gallery";
+import NewsMentions from "@/components/NewsMentions";
 
 /**
  * Design: Warm Editorial
@@ -11,27 +13,99 @@ import Layout from "@/components/Layout";
  */
 
 const STATS = [
-  { value: "4+", label: "Medals" },
-  { value: "3+", label: "Projects" },
+  { value: "7+", label: "Awards" },
+  { value: "4+", label: "Competitions" },
   { value: "16", label: "Age" },
-  { value: "1×", label: "Intl. rep." },
+  { value: "1×", label: "Global rep." },
 ];
 
 const HIGHLIGHTS = [
   {
     year: "2026",
-    title: "First Global Challenge",
-    detail: "Head Programmer for Team SA · 118/181 countries · Panama",
+    title: "2nd Place Hackathon Winner",
+    detail: "Created a mobile app for environmental services",
   },
   {
-    year: "2026",
-    title: "Hackathon Runner-Up",
-    detail: "Led the team to 2nd place in our first hackathon",
+    year: "2025",
+    title: "First Global Robotics Competition",
+    detail: "Head Programmer for Team SA · 118/181 countries · Panama",
   },
   {
     year: "2025",
     title: "Gold · Springbots Robotics",
     detail: "Regional gold, 6th nationally",
+  },
+];
+
+const GALLERY_IMAGES = [
+  {
+    id: "1",
+    src: "https://i.imgur.com/dEKV5Yo.jpeg",
+    caption: "Hackathon Team Collaboration",
+    category: "Hackathon",
+  },
+  {
+    id: "2",
+    src: "https://i.imgur.com/GfWfAPk.jpeg",
+    caption: "First Global Challenge - Panama city, Panama",
+    category: "Competition",
+  },
+  {
+    id: "3",
+    src: "https://i.imgur.com/UWnI0L1.jpeg",
+    caption: "Bronze winner at the ISF - International Science fair",
+    category: "Science Fair",
+  },
+  {
+    id: "4",
+    src: "https://i.imgur.com/7UcNxQj.jpeg",
+    caption: "Gold Medal: Springbots Regional Robotics Competition",
+    category: "Robotics",
+  },
+  {
+    id: "5",
+    src: "https://i.imgur.com/E1c1QZp.jpeg",
+    caption: "Radio Interview, Why I started coding and robotics",
+    category: "Interview",
+  },
+  {
+    id: "6",
+    src: "https://i.imgur.com/ywRb3WB.jpeg",
+    caption: "Science Workshop",
+    category: "STEM",
+  },
+];
+
+const NEWS_ITEMS = [
+  {
+    id: "1",
+    headline: "Local Student Represents South Africa at First Global Robotics 2025",
+    publication: "Local News Network",
+    date: "March 2025",
+    summary:
+      "16-year-old Clyde Snyders was selected as Head Programmer for Team South Africa at the First Global Robotics Competition in Panama, competing against 118 other countries.",
+    url: "#",
+    category: "coverage" as const,
+  },
+  {
+    id: "2",
+    headline: "Young Innovators Win Gold at Regional Robotics Championship",
+    publication: "Science & Tech Weekly",
+    date: "February 2025",
+    summary:
+      "Clyde's team secured gold medal at the Springbots Robotics competition, placing 6th nationally with an innovative autonomous system design.",
+    url: "#",
+    category: "feature" as const,
+  },
+  {
+    id: "3",
+    headline: "Interview: Building the Future with Code and Robotics",
+    publication: "Student Innovation Magazine",
+    date: "January 2026",
+    summary:
+      "We sat down with Clyde to discuss his journey in coding, robotics, and what drives his passion for building solutions that matter.",
+    url: "#",
+    category: "interview" as const,
   },
 ];
 
@@ -115,7 +189,7 @@ export default function Home() {
             {/* Social links */}
             <div
               className="mt-10 flex items-center gap-5 text-ink-soft animate-fade-up"
-              style={{ animationDelay: "420ms" }}
+              style={{ animationDelay: "400ms" }}
             >
               <a
                 href="mailto:clydesnyders17@gmail.com"
@@ -125,7 +199,7 @@ export default function Home() {
                 <Mail className="h-5 w-5" />
               </a>
               <a
-                href="https://github.com/clydesnyders05-oss"
+                href="https://github.com/clyder-snyders"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -134,7 +208,7 @@ export default function Home() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://www.instagram.com/c.snyders.05?igsh=aDRxZTF5MG5rdzQy"
+                href="https://www.instagram.com/clyde.snyders?igsh=aDRxZTF5MG5rdzQy"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -148,7 +222,7 @@ export default function Home() {
             </div>
           </div>
 
-              {/* Portrait card */}
+          {/* Workspace illustration */}
           <div className="md:col-span-5 lg:col-span-5">
             <div
               className="relative mx-auto max-w-md md:max-w-none animate-fade-up"
@@ -156,29 +230,20 @@ export default function Home() {
             >
               <div
                 aria-hidden
-                className="absolute -inset-4 -z-10 rounded-[2rem] opacity-60 blur-2xl"
+                className="absolute -inset-4 -z-10 rounded-[2rem] opacity-40 blur-3xl"
                 style={{
                   background:
-                    "linear-gradient(135deg, color-mix(in oklab, var(--brand) 35%, transparent), color-mix(in oklab, var(--gold) 30%, transparent))",
+                    "linear-gradient(135deg, color-mix(in oklab, var(--brand) 25%, transparent), color-mix(in oklab, var(--gold) 20%, transparent))",
                 }}
               />
-              <div className="relative overflow-hidden rounded-[2rem] border border-border bg-surface-elevated shadow-lg">
+              <div className="relative overflow-hidden rounded-[2rem] border border-border bg-white shadow-lg">
                 <img
-                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663452447906/oN63drPHpvEQvbUAiMNbHR/clyde-portrait-Bb85jFFHtSe7ubiDixD8yf.webp"
-                  alt="Clyde Snyders - Student, Coder, Robotics Builder"
-                  width={1088}
-                  height={1360}
-                  className="aspect-[4/5] h-full w-full object-cover"
+                  src="/manus-storage/clyde-workspace_ffff798c.png"
+                  alt="Clyde Snyders - Coding, Robotics, and Building"
+                  width={1200}
+                  height={1200}
+                  className="h-full w-full object-cover"
                 />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-white backdrop-blur-md">
-                  <div>
-                    <p className="font-mono text-[10px] uppercase tracking-widest opacity-80">
-                      Now
-                    </p>
-                    <p className="text-sm font-medium">Building the next thing</p>
-                  </div>
-                  <Sparkles className="h-4 w-4 text-gold" />
-                </div>
               </div>
             </div>
           </div>
@@ -244,47 +309,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="container-x pb-24">
-        <div
-          className="relative overflow-hidden rounded-[2rem] border border-border p-10 md:p-16"
-          style={{
-            background:
-              "linear-gradient(135deg, color-mix(in oklab, var(--brand) 12%, var(--surface-elevated)), var(--surface-elevated))",
-          }}
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full opacity-50 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, color-mix(in oklab, var(--brand) 40%, transparent), transparent 70%)",
-            }}
-          />
-          <div className="relative grid gap-8 md:grid-cols-2 md:items-end">
-            <div>
-              <p className="text-eyebrow">Let's build</p>
-              <h2 className="mt-4 text-display text-4xl md:text-5xl">
-                Mentor, collaborate,
-                <br />
-                <span className="italic font-light">or just say hi.</span>
-              </h2>
-            </div>
-            <div className="md:text-right">
-              <p className="max-w-md text-ink-soft md:ml-auto">
-                I'm always open to mentorship, school invitations, and project
-                collaborations. Reach out — I reply.
-              </p>
-              <Link
-                to="/contact"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
-              >
-                Start a conversation <ArrowRight className="h-4 w-4" />
-              </Link>
+      {/* GALLERY SECTION */}
+      <section id="gallery" className="container-x py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <p className="text-eyebrow">Visual journey</p>
+            <h2 className="mt-4 text-display text-4xl md:text-5xl">
+              Moments
+              <br />
+              <span className="italic font-light">that matter.</span>
+            </h2>
+            <p className="mt-6 text-ink-soft">
+              Photos from competitions, hackathons, and team events. Click any image to view in full size.
+            </p>
+          </div>
+          <div className="md:col-span-8">
+            <Gallery images={GALLERY_IMAGES} />
+          </div>
+        </div>
+      </section>
+
+      {/* NEWS & MENTIONS SECTION */}
+      <section id="news" className="container-x py-24 md:py-32 border-t border-border">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <p className="text-eyebrow">In the news</p>
+            <h2 className="mt-4 text-display text-4xl md:text-5xl">
+              Press &
+              <br />
+              <span className="italic font-light">mentions.</span>
+            </h2>
+            <p className="mt-6 text-ink-soft">
+              Coverage and features about my work in robotics, competitions, and innovation.
+            </p>
+          </div>
+          <div className="md:col-span-8">
+            <div className="rounded-lg border-2 border-dashed border-border bg-surface-elevated p-12 text-center">
+              <p className="text-lg text-ink-soft">Coming soon...</p>
+              <p className="mt-2 text-sm text-ink-soft">I'm curating the best coverage and mentions of my work. Check back soon!</p>
             </div>
           </div>
         </div>
       </section>
+
+
     </Layout>
   );
 }

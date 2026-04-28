@@ -5,15 +5,13 @@ import Layout from "@/components/Layout";
 /**
  * Design: Warm Editorial
  * - Long-form content with generous spacing
- * - Visual hierarchy with typography
- * - Skill badges and highlights
+ * - Skills organized by category
  */
 
 const SKILLS = [
-  { category: "Programming", items: ["Python", "JavaScript", "TypeScript", "C++", "React", "Node.js"] },
-  { category: "Robotics", items: ["Arduino", "ROS", "CAD Design", "Mechanical Engineering", "Sensor Integration", "Control Systems"] },
-  { category: "Tools & Platforms", items: ["Git", "Docker", "Firebase", "MongoDB", "AWS", "Linux"] },
-  { category: "Soft Skills", items: ["Team Leadership", "Problem Solving", "Communication", "Project Management", "Mentoring"] },
+  { category: "Programming", items: ["Python", "Block Coding", "JavaScript", "C++"] },
+  { category: "Robotics", items: ["Arduino", "CAD Design", "Raspberry Pi", "LEGO"] },
+  { category: "Tools & Platforms", items: ["GitHub", "Firebase", "Supabase", "Linux", "Vercel"] },
 ];
 
 export default function About() {
@@ -24,145 +22,132 @@ export default function About() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all mb-8">
           <ArrowRight className="h-4 w-4 rotate-180" /> Back home
         </Link>
-        <h1 className="text-display text-5xl md:text-7xl">
-          About
-          <br />
-          <span className="italic font-light">me</span>
-        </h1>
+        <h1 className="text-display text-5xl md:text-6xl font-bold mb-6">About me</h1>
       </section>
 
-      {/* Story */}
-      <section className="container-x py-12 md:py-16">
-        <div className="max-w-3xl">
-          <p className="text-eyebrow mb-6">My story</p>
-          <div className="space-y-6 text-lg text-ink-soft">
-            <p>
-              I'm Clyde Snyders, a 16-year-old student from South Africa with a passion for technology, robotics, and solving real-world problems. My journey into the world of coding and robotics began in Grade 8 when I first discovered the power of programming to bring ideas to life.
-            </p>
-            <p>
-              What started as curiosity has evolved into a serious pursuit. I've spent the last few years building projects, competing in robotics competitions, and continuously learning new technologies. Whether it's writing efficient code, designing mechanical systems, or leading a team through challenges, I'm driven by the desire to create something meaningful.
-            </p>
-            <p>
-              My experience spans full-stack web development, robotics systems integration, and competitive programming. I've represented South Africa at the First Global Challenge, earned medals in regional robotics competitions, and led my team to runner-up in our first hackathon. But beyond the achievements, what I value most is the learning process and the relationships I build along the way.
-            </p>
-            <p>
-              I believe in the power of collaboration and mentorship. I'm always eager to help younger students get started in coding and robotics, and I'm equally excited to learn from experienced professionals in the field. My goal is not just to build cool projects, but to contribute to a community of innovators and problem-solvers.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Main Content */}
+      <section className="container-x pb-24 md:pb-32">
+        <div className="grid gap-16 md:grid-cols-3">
+          {/* Bio */}
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <h2 className="text-display text-3xl font-bold mb-4">My Journey</h2>
+              <p className="text-lg text-ink-soft leading-relaxed mb-4">
+                I am Clyde Snyders, a student based in South Africa with a passion for coding, robotics and science. My journey started in Grade 8 with a simple goal: to make solar energy smarter. Since then, I've gone from working in my school's science lab to representing my country as the Head Programmer for Team South Africa at the FIRST Global 2025 Challenge in Panama.
+              </p>
+              <p className="text-lg text-ink-soft leading-relaxed">
+                I believe that where you come from doesn't limit where you can go. Whether I'm coding a robot to compete on the world stage or building an app to help my local community, I am driven by the belief that STEM is a tool for change. I'm not just building robots; I'm trying to build a future where innovation helps everyone.
+              </p>
+            </div>
 
-      {/* Skills */}
-      <section className="container-x py-12 md:py-24">
-        <p className="text-eyebrow mb-8">Skills & expertise</p>
-        <div className="grid gap-12 md:grid-cols-2">
-          {SKILLS.map((skillGroup) => (
-            <div key={skillGroup.category}>
-              <h3 className="text-display text-xl mb-6">{skillGroup.category}</h3>
-              <div className="flex flex-wrap gap-3">
-                {skillGroup.items.map((skill) => (
-                  <span
-                    key={skill}
-                    className="inline-block px-4 py-2 rounded-full bg-brand/10 text-brand text-sm font-medium"
-                  >
-                    {skill}
-                  </span>
+            {/* Skills */}
+            <div className="pt-8 border-t border-border">
+              <h2 className="text-display text-3xl font-bold mb-8">Skills & Expertise</h2>
+              <div className="space-y-8">
+                {SKILLS.map((skillGroup) => (
+                  <div key={skillGroup.category}>
+                    <h3 className="text-display text-xl font-bold text-brand mb-4">
+                      {skillGroup.category}
+                    </h3>
+                    <div className="flex flex-wrap gap-3">
+                      {skillGroup.items.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-4 py-2 rounded-full bg-brand/10 text-brand font-medium text-sm hover:bg-brand/20 transition-colors"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Timeline */}
-      <section className="container-x py-12 md:py-24">
-        <p className="text-eyebrow mb-8">Timeline</p>
-        <div className="max-w-3xl space-y-8">
-          <div className="border-l-2 border-brand/30 pl-6">
-            <p className="font-mono text-sm uppercase tracking-widest text-brand font-semibold mb-2">2026</p>
-            <h4 className="text-display text-lg mb-2">First Global Challenge</h4>
-            <p className="text-ink-soft">Head Programmer for Team South Africa, competing among 118 nations in Panama.</p>
+            {/* Values */}
+            <div className="pt-8 border-t border-border">
+              <h2 className="text-display text-3xl font-bold mb-4">What Drives Me</h2>
+              <ul className="space-y-4">
+                <li className="flex gap-4">
+                  <span className="text-brand font-bold text-xl">→</span>
+                  <span className="text-ink-soft">
+                    <strong className="text-ink">Innovation for Impact:</strong> Using technology to solve real-world problems
+                  </span>
+                </li>
+                <li className="flex gap-4">
+                  <span className="text-brand font-bold text-xl">→</span>
+                  <span className="text-ink-soft">
+                    <strong className="text-ink">Continuous Learning:</strong> Always exploring new technologies and pushing my limits
+                  </span>
+                </li>
+                <li className="flex gap-4">
+                  <span className="text-brand font-bold text-xl">→</span>
+                  <span className="text-ink-soft">
+                    <strong className="text-ink">Community Building:</strong> Sharing knowledge and lifting others up
+                  </span>
+                </li>
+                <li className="flex gap-4">
+                  <span className="text-brand font-bold text-xl">→</span>
+                  <span className="text-ink-soft">
+                    <strong className="text-ink">Excellence:</strong> Striving for quality in everything I create
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="border-l-2 border-brand/30 pl-6">
-            <p className="font-mono text-sm uppercase tracking-widest text-brand font-semibold mb-2">2026</p>
-            <h4 className="text-display text-lg mb-2">Hackathon Success</h4>
-            <p className="text-ink-soft">Led team to runner-up position in first hackathon, demonstrating leadership and technical skills.</p>
-          </div>
-          <div className="border-l-2 border-brand/30 pl-6">
-            <p className="font-mono text-sm uppercase tracking-widest text-brand font-semibold mb-2">2025</p>
-            <h4 className="text-display text-lg mb-2">Robotics Excellence</h4>
-            <p className="text-ink-soft">Achieved regional gold and 6th place nationally in Springbots Robotics competition.</p>
-          </div>
-          <div className="border-l-2 border-brand/30 pl-6">
-            <p className="font-mono text-sm uppercase tracking-widest text-brand font-semibold mb-2">2024</p>
-            <h4 className="text-display text-lg mb-2">Team Leadership</h4>
-            <p className="text-ink-soft">Promoted to robotics team lead, mentoring younger students and organizing competitions.</p>
-          </div>
-          <div className="border-l-2 border-brand/30 pl-6">
-            <p className="font-mono text-sm uppercase tracking-widest text-brand font-semibold mb-2">2023</p>
-            <h4 className="text-display text-lg mb-2">Journey Begins</h4>
-            <p className="text-ink-soft">Started learning programming and robotics, participating in first competitions.</p>
-          </div>
-        </div>
-      </section>
 
-      {/* Values */}
-      <section className="container-x py-12 md:py-24">
-        <p className="text-eyebrow mb-8">What I value</p>
-        <div className="grid gap-8 md:grid-cols-3">
-          <div className="surface-card p-8">
-            <h3 className="text-display text-xl mb-3">Learning</h3>
-            <p className="text-ink-soft">
-              I'm committed to continuous learning and growth. Every project is an opportunity to expand my skills and knowledge.
-            </p>
-          </div>
-          <div className="surface-card p-8">
-            <h3 className="text-display text-xl mb-3">Collaboration</h3>
-            <p className="text-ink-soft">
-              Great things are built together. I believe in the power of teamwork and diverse perspectives.
-            </p>
-          </div>
-          <div className="surface-card p-8">
-            <h3 className="text-display text-xl mb-3">Innovation</h3>
-            <p className="text-ink-soft">
-              I'm passionate about pushing boundaries and finding creative solutions to complex problems.
-            </p>
+          {/* Sidebar */}
+          <div className="md:col-span-1">
+            <div className="sticky top-24 rounded-2xl border border-border bg-surface-elevated p-6 space-y-6">
+              <div>
+                <p className="text-xs font-semibold text-brand uppercase tracking-widest mb-2">
+                  Location
+                </p>
+                <p className="text-ink font-medium">South Africa</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-brand uppercase tracking-widest mb-2">
+                  Currently
+                </p>
+                <p className="text-ink font-medium">Grade 10 Student</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-brand uppercase tracking-widest mb-2">
+                  Interests
+                </p>
+                <div className="space-y-2">
+                  <p className="text-sm text-ink-soft">Robotics</p>
+                  <p className="text-sm text-ink-soft">Coding</p>
+                  <p className="text-sm text-ink-soft">Science</p>
+                  <p className="text-sm text-ink-soft">Innovation</p>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-border">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all"
+                >
+                  Get in touch <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="container-x pb-24">
-        <div
-          className="relative overflow-hidden rounded-[2rem] border border-border p-10 md:p-16"
-          style={{
-            background:
-              "linear-gradient(135deg, color-mix(in oklab, var(--brand) 12%, var(--surface-elevated)), var(--surface-elevated))",
-          }}
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full opacity-50 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, color-mix(in oklab, var(--brand) 40%, transparent), transparent 70%)",
-            }}
-          />
-          <div className="relative">
-            <p className="text-eyebrow">Let's connect</p>
-            <h2 className="mt-4 text-display text-4xl md:text-5xl mb-6">
-              Interested in working together?
-            </h2>
-            <p className="max-w-2xl text-ink-soft mb-6">
-              I'm always open to new opportunities, collaborations, and conversations. Let's build something amazing together.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
-            >
-              Get in touch <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+      <section className="container-x py-16 md:py-24 border-t border-border">
+        <div className="max-w-2xl">
+          <h2 className="text-display text-3xl md:text-4xl font-bold mb-4">Let's collaborate</h2>
+          <p className="text-lg text-ink-soft mb-8">
+            I'm always interested in connecting with people who share a passion for innovation and making a positive impact. Whether it's a project, mentorship, or just a conversation, feel free to reach out!
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
+          >
+            Start a conversation <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </Layout>

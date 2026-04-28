@@ -5,58 +5,57 @@ import Layout from "@/components/Layout";
 /**
  * Design: Warm Editorial
  * - Timeline layout with visual hierarchy
- * - Badge system for achievement types
- * - Asymmetric spacing and breathing room
+ * - Achievement cards with icons and descriptions
  */
 
 const ACHIEVEMENTS = [
   {
     year: 2026,
-    title: "First Global Challenge",
-    description: "Head Programmer for Team South Africa in the First Global Challenge, representing the country among 118 nations.",
-    location: "Panama",
-    type: "competition",
-    icon: Trophy,
-  },
-  {
-    year: 2026,
-    title: "Hackathon Runner-Up",
-    description: "Led my team to 2nd place in our first hackathon, demonstrating leadership and technical skills under pressure.",
-    location: "South Africa",
-    type: "competition",
-    icon: Award,
-  },
-  {
-    year: 2025,
-    title: "Gold Medal · Springbots Robotics",
-    description: "Achieved regional gold and placed 6th nationally in the Springbots Robotics competition.",
-    location: "South Africa",
-    type: "competition",
+    title: "2nd Place Hackathon Winner",
+    description: "I attended my first hackathon and won second place. I created a mobile app that helps with environmental services.",
     icon: Trophy,
   },
   {
     year: 2025,
-    title: "Science Fair Excellence",
-    description: "Presented groundbreaking research in robotics and AI at the regional science fair, earning recognition for innovation.",
-    location: "South Africa",
-    type: "academic",
-    icon: Award,
-  },
-  {
-    year: 2024,
-    title: "Programming Certification",
-    description: "Completed advanced Python and web development certifications, demonstrating proficiency in full-stack development.",
-    location: "Online",
-    type: "academic",
-    icon: Award,
-  },
-  {
-    year: 2024,
-    title: "Robotics Team Lead",
-    description: "Promoted to team lead for robotics club, mentoring younger students and organizing competitions.",
-    location: "South Africa",
-    type: "leadership",
+    title: "First Global Robotics Competition",
+    description: "I took part in my first global challenge in Panama. I was chosen as the head programmer, and our team finished 118th out of 181 countries.",
     icon: Trophy,
+  },
+  {
+    year: 2025,
+    title: "Gold Medal: Regional Science Expo",
+    description: "Awarded a gold medal for the second consecutive year and won Best Category in Physics. Showcased a passion for experimentation and discovery.",
+    icon: Trophy,
+  },
+  {
+    year: 2025,
+    title: "Gold Medal: Springbots Robotics",
+    description: "Won gold at the regional Springbots robotics competition, later placing 6th nationally. Led a team in designing and programming innovative robots.",
+    icon: Trophy,
+  },
+  {
+    year: 2025,
+    title: "4th Place Winner: World Robot Olympiad (WRO)",
+    description: "Secured 4th place in the World Robot Olympiad, competing with top students from various schools. Demonstrated creativity, problem solving and resilience under pressure.",
+    icon: Award,
+  },
+  {
+    year: 2024,
+    title: "Gold Medal: Regional Science Fair",
+    description: "Secured a Gold in the 'Engineering' category at regional science fair, competing with top students with different projects in my region.",
+    icon: Trophy,
+  },
+  {
+    year: 2024,
+    title: "Bronze Medal: International Science Fair (ISF)",
+    description: "Secured a bronze in the 'Engineering' category at ISF, competing with top students globally. Demonstrated creativity and resilience under pressure.",
+    icon: Award,
+  },
+  {
+    year: 2024,
+    title: "Bronze Medal: World Robot Olympiad",
+    description: "Achieved a bronze at WRO, representing the Eastern Cape internationally and collaborating with diverse teams.",
+    icon: Award,
   },
 ];
 
@@ -68,119 +67,73 @@ export default function Achievements() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all mb-8">
           <ArrowRight className="h-4 w-4 rotate-180" /> Back home
         </Link>
-        <h1 className="text-display text-5xl md:text-7xl">
-          Achievements &
-          <br />
-          <span className="italic font-light">milestones</span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-ink-soft">
-          A timeline of my journey through competitions, academic achievements, and leadership roles.
+        <h1 className="text-display text-5xl md:text-6xl font-bold mb-6">Achievements</h1>
+        <p className="text-lg text-ink-soft max-w-2xl">
+          A timeline of awards, competitions, and milestones that represent my journey in robotics, science, and innovation.
         </p>
       </section>
 
       {/* Timeline */}
-      <section className="container-x py-12 md:py-24">
-        <div className="max-w-3xl">
+      <section className="container-x pb-24 md:pb-32">
+        <div className="space-y-12">
           {ACHIEVEMENTS.map((achievement, index) => {
             const Icon = achievement.icon;
             return (
-              <div key={index} className="mb-12 md:mb-16 relative">
+              <div
+                key={index}
+                className="relative pl-8 md:pl-12 animate-fade-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-brand flex items-center justify-center ring-4 ring-background">
+                  <Icon className="h-3 w-3 text-white" />
+                </div>
+
                 {/* Timeline line */}
-                {index !== ACHIEVEMENTS.length - 1 && (
-                  <div className="absolute left-6 top-16 w-0.5 h-20 md:h-24 bg-gradient-to-b from-brand/30 to-transparent" />
+                {index < ACHIEVEMENTS.length - 1 && (
+                  <div className="absolute left-2.5 top-8 bottom-0 w-0.5 bg-gradient-to-b from-brand to-brand/20" />
                 )}
 
-                <div className="flex gap-6 md:gap-8">
-                  {/* Timeline dot */}
-                  <div className="flex-shrink-0 pt-1">
-                    <div className="w-12 h-12 rounded-full bg-brand/20 border-2 border-brand flex items-center justify-center">
-                      <Icon className="h-5 w-5 text-brand" />
-                    </div>
+                {/* Content */}
+                <div className="group">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-display text-xl md:text-2xl font-bold text-ink group-hover:text-brand transition-colors">
+                      {achievement.title}
+                    </h3>
+                    <span className="text-sm font-semibold text-brand bg-brand/10 px-3 py-1 rounded-full">
+                      {achievement.year}
+                    </span>
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-1 pb-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <span className="font-mono text-xs uppercase tracking-widest text-brand font-semibold">
-                        {achievement.year}
-                      </span>
-                      <span className="inline-block px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-medium capitalize">
-                        {achievement.type}
-                      </span>
-                    </div>
-                    <h3 className="text-display text-2xl mb-2">{achievement.title}</h3>
-                    <p className="text-ink-soft mb-3">{achievement.description}</p>
-                    <p className="text-sm text-ink-soft font-mono">📍 {achievement.location}</p>
-                  </div>
+                  <p className="text-ink-soft leading-relaxed max-w-2xl">
+                    {achievement.description}
+                  </p>
                 </div>
               </div>
             );
           })}
         </div>
-      </section>
 
-      {/* Stats Section */}
-      <section className="border-y border-border bg-surface">
-        <div className="container-x grid grid-cols-2 divide-x divide-border md:grid-cols-4 py-12 md:py-16">
-          <div className="px-4 text-center">
-            <p className="text-display text-4xl md:text-5xl">{ACHIEVEMENTS.length}+</p>
-            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-ink-soft">
-              Achievements
-            </p>
-          </div>
-          <div className="px-4 text-center">
-            <p className="text-display text-4xl md:text-5xl">4+</p>
-            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-ink-soft">
-              Medals
-            </p>
-          </div>
-          <div className="px-4 text-center">
-            <p className="text-display text-4xl md:text-5xl">3</p>
-            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-ink-soft">
-              Years Active
-            </p>
-          </div>
-          <div className="px-4 text-center">
-            <p className="text-display text-4xl md:text-5xl">1×</p>
-            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-ink-soft">
-              International
-            </p>
-          </div>
+        {/* Disclaimer */}
+        <div className="mt-24 pt-12 border-t border-border">
+          <p className="text-sm text-ink-soft italic max-w-2xl">
+            <strong>Disclaimer:</strong> I did not achieve these things on my own. I received support and guidance from mentors, teachers, peers and friends and I appreciate their contribution.
+          </p>
         </div>
-      </section>
 
-      {/* CTA */}
-      <section className="container-x py-24 md:py-32">
-        <div
-          className="relative overflow-hidden rounded-[2rem] border border-border p-10 md:p-16"
-          style={{
-            background:
-              "linear-gradient(135deg, color-mix(in oklab, var(--brand) 12%, var(--surface-elevated)), var(--surface-elevated))",
-          }}
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full opacity-50 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, color-mix(in oklab, var(--brand) 40%, transparent), transparent 70%)",
-            }}
-          />
-          <div className="relative">
-            <p className="text-eyebrow">What's next?</p>
-            <h2 className="mt-4 text-display text-4xl md:text-5xl mb-6">
-              Always learning, always building.
-            </h2>
-            <p className="max-w-2xl text-ink-soft mb-6">
-              My journey is just beginning. I'm constantly exploring new technologies, taking on bigger challenges, and pushing the boundaries of what's possible in robotics and software development.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
-            >
-              Let's collaborate <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+        {/* CTA */}
+        <div className="mt-16 flex flex-col sm:flex-row gap-4">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
+          >
+            Let's collaborate <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-medium text-ink hover:bg-surface transition-all"
+          >
+            View projects <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </Layout>

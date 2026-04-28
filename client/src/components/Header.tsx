@@ -7,12 +7,16 @@ import { Link, useLocation } from "wouter";
  * - Clean header with logo and navigation
  * - Mobile hamburger menu
  * - Active link highlighting
+ * - Smooth scroll to sections (Gallery, News)
+ * - Smooth scroll-to-top for page routes (About, Contact, etc.)
  */
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Achievements", href: "/achievements" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "News", href: "/news" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -24,6 +28,45 @@ export default function Header() {
   const isActive = (href: string) => {
     if (href === "/") return location === "/";
     return location.startsWith(href);
+  };
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    // If it's gallery or news, scroll to section on home page
+    if (href === "/gallery" || href === "/news") {
+      e.preventDefault();
+      const sectionId = href.replace("/", "");
+      
+      // If we're on home page, scroll directly
+      if (location === "/") {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const headerHeight = 80;
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY - headerHeight;
+            window.scrollTo({ top: elementPosition, behavior: "smooth" });
+          }
+        }, 0);
+        setIsOpen(false);
+      } else {
+        // If we're on another page, navigate to home first
+        window.location.href = `/#${sectionId}`;
+      }
+    } else if (href === "/about" || href === "/contact" || href === "/projects" || href === "/achievements") {
+      // For page routes, close menu and scroll to top smoothly
+      setIsOpen(false);
+      // Scroll to top smoothly when navigating to these pages
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 50);
+    } else if (href === "/") {
+      // Home page - close menu and scroll to top
+      setIsOpen(false);
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 50);
+    } else {
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -46,6 +89,7 @@ export default function Header() {
             <Link
               key={item.href}
               to={item.href}
+              onClick={(e) => handleNavClick(item.href, e)}
               className={`text-sm font-medium transition-colors ${
                 isActive(item.href)
                   ? "text-brand"
@@ -79,7 +123,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavClick(item.href, e)}
                 className={`block px-4 py-2 rounded-lg transition-colors ${
                   isActive(item.href)
                     ? "bg-brand/10 text-brand font-medium"
