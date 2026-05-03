@@ -2,7 +2,6 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import Gallery from "@/components/Gallery";
-import NewsMentions from "@/components/NewsMentions";
 import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants } from "@/lib/animations";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowRight, Mail, Github, Instagram } from "lucide-react";
@@ -79,38 +78,7 @@ const GALLERY_IMAGES = [
   },
 ];
 
-const NEWS_ITEMS = [
-  {
-    id: "1",
-    headline: "Local Student Represents South Africa at First Global Robotics 2025",
-    publication: "Local News Network",
-    date: "March 2025",
-    summary:
-      "16-year-old Clyde Snyders was selected as Head Programmer for Team South Africa at the First Global Robotics Competition in Panama, competing against 118 other countries.",
-    url: "#",
-    category: "coverage" as const,
-  },
-  {
-    id: "2",
-    headline: "Young Innovators Win Gold at Regional Robotics Championship",
-    publication: "Science & Tech Weekly",
-    date: "February 2025",
-    summary:
-      "Clyde's team secured gold medal at the Springbots Robotics competition, placing 6th nationally with an innovative autonomous system design.",
-    url: "#",
-    category: "feature" as const,
-  },
-  {
-    id: "3",
-    headline: "Interview: Building the Future with Code and Robotics",
-    publication: "Student Innovation Magazine",
-    date: "January 2026",
-    summary:
-      "We sat down with Clyde to discuss his journey in coding, robotics, and what drives his passion for building solutions that matter.",
-    url: "#",
-    category: "interview" as const,
-  },
-];
+const NEWS_ITEMS = [];
 
 export default function Home() {
   const statsRef = useScrollReveal(0.2);
@@ -291,7 +259,7 @@ export default function Home() {
                 transition={{ duration: 0.3 }}
               >
                 <motion.img
-                  src="/manus-storage/clyde-workspace_ffff798c.png"
+                  src="/manus-storage/clyde-workspace_efab139f.png"
                   alt="Clyde Snyders - Coding, Robotics, and Building"
                   width={1200}
                   height={1200}
@@ -430,7 +398,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{
             duration: ANIMATION_TIMINGS.scrollReveal,
-            ease: ANIMATION_EASING.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal as any,
           }}
           viewport={{ once: true, margin: "-100px" }}
         >
@@ -444,7 +412,10 @@ export default function Home() {
               Coverage and features about my work in robotics, competitions, and innovation.
             </p>
           </div>
-          <NewsMentions items={NEWS_ITEMS} />
+          <div className="rounded-2xl border border-border bg-surface-elevated p-8 md:p-12 text-center">
+            <p className="text-lg font-medium text-ink-soft">Coming Soon</p>
+            <p className="text-sm text-ink-soft mt-2">Press coverage and media mentions will be featured here.</p>
+          </div>
         </motion.div>
       </section>
     </Layout>
