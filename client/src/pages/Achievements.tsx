@@ -1,11 +1,15 @@
-import { ArrowRight, Award, Trophy } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
+import { ArrowRight, Award, Trophy } from "lucide-react";
 import Layout from "@/components/Layout";
+import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants } from "@/lib/animations";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 /**
- * Design: Warm Editorial
+ * Design: Warm Editorial + Kinetic Editorial Animations
  * - Timeline layout with visual hierarchy
  * - Achievement cards with icons and descriptions
+ * - Scroll-triggered animations for timeline items
  */
 
 const ACHIEVEMENTS = [
@@ -60,10 +64,20 @@ const ACHIEVEMENTS = [
 ];
 
 export default function Achievements() {
+  const timelineRef = useScrollReveal(0.2);
+
   return (
     <Layout>
       {/* Header */}
-      <section className="container-x pt-12 md:pt-20 pb-12 md:pb-16">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: ANIMATION_TIMINGS.entrance,
+          ease: ANIMATION_EASING.entrance,
+        }}
+        className="container-x pt-12 md:pt-20 pb-12 md:pb-16"
+      >
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all mb-8">
           <ArrowRight className="h-4 w-4 rotate-180" /> Back home
         </Link>
@@ -71,70 +85,126 @@ export default function Achievements() {
         <p className="text-lg text-ink-soft max-w-2xl">
           A timeline of awards, competitions, and milestones that represent my journey in robotics, science, and innovation.
         </p>
-      </section>
+      </motion.section>
 
       {/* Timeline */}
-      <section className="container-x pb-24 md:pb-32">
-        <div className="space-y-12">
+      <section ref={timelineRef.ref} className="container-x pb-24 md:pb-32">
+        <motion.div
+          className="space-y-12"
+          initial="hidden"
+          animate={timelineRef.isVisible ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
           {ACHIEVEMENTS.map((achievement, index) => {
             const Icon = achievement.icon;
             return (
-              <div
+              <motion.div
                 key={index}
-                className="relative pl-8 md:pl-12 animate-fade-up"
-                style={{ animationDelay: `${index * 50}ms` }}
+                variants={itemVariants}
+                className="relative pl-8 md:pl-12"
               >
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-brand flex items-center justify-center ring-4 ring-background">
+                {/* Timeline dot with animation */}
+                <motion.div
+                  className="absolute left-0 top-1 w-6 h-6 rounded-full bg-brand flex items-center justify-center ring-4 ring-background"
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ duration: ANIMATION_TIMINGS.hover }}
+                >
                   <Icon className="h-3 w-3 text-white" />
-                </div>
+                </motion.div>
 
                 {/* Timeline line */}
                 {index < ACHIEVEMENTS.length - 1 && (
-                  <div className="absolute left-2.5 top-8 bottom-0 w-0.5 bg-gradient-to-b from-brand to-brand/20" />
+                  <motion.div
+                    className="absolute left-2.5 top-8 bottom-0 w-0.5 bg-gradient-to-b from-brand to-brand/20"
+                    initial={{ scaleY: 0 }}
+                    animate={timelineRef.isVisible ? { scaleY: 1 } : { scaleY: 0 }}
+                    transition={{
+                      duration: ANIMATION_TIMINGS.scrollReveal,
+                      ease: ANIMATION_EASING.scrollReveal,
+                      delay: index * ANIMATION_TIMINGS.scrollStagger + 0.1,
+                    }}
+                    style={{ originY: 0 }}
+                  />
                 )}
 
                 {/* Content */}
-                <div className="group">
+                <motion.div
+                  className="group"
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: ANIMATION_TIMINGS.hover }}
+                >
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-display text-xl md:text-2xl font-bold text-ink group-hover:text-brand transition-colors">
                       {achievement.title}
                     </h3>
-                    <span className="text-sm font-semibold text-brand bg-brand/10 px-3 py-1 rounded-full">
+                    <motion.span
+                      className="text-sm font-semibold text-brand bg-brand/10 px-3 py-1 rounded-full"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       {achievement.year}
-                    </span>
+                    </motion.span>
                   </div>
                   <p className="text-ink-soft leading-relaxed max-w-2xl">
                     {achievement.description}
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Disclaimer */}
-        <div className="mt-24 pt-12 border-t border-border">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{
+            duration: ANIMATION_TIMINGS.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal,
+          }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-24 pt-12 border-t border-border"
+        >
           <p className="text-sm text-ink-soft italic max-w-2xl">
             <strong>Disclaimer:</strong> I did not achieve these things on my own. I received support and guidance from mentors, teachers, peers and friends and I appreciate their contribution.
           </p>
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="mt-16 flex flex-col sm:flex-row gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: ANIMATION_TIMINGS.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal,
+          }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-16 flex flex-col sm:flex-row gap-4"
+        >
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
           >
-            Let's collaborate <ArrowRight className="h-4 w-4" />
+            Let's collaborate
+            <motion.div
+              whileHover={{ x: 4 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ArrowRight className="h-4 w-4" />
+            </motion.div>
           </Link>
           <Link
             to="/projects"
             className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-medium text-ink hover:bg-surface transition-all"
           >
-            View projects <ArrowRight className="h-4 w-4" />
+            View projects
+            <motion.div
+              whileHover={{ x: 4 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ArrowRight className="h-4 w-4" />
+            </motion.div>
           </Link>
-        </div>
+        </motion.div>
       </section>
     </Layout>
   );

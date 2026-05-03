@@ -1,14 +1,17 @@
-import { ArrowRight, Github, Instagram, Mail, Sparkles } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import Gallery from "@/components/Gallery";
 import NewsMentions from "@/components/NewsMentions";
+import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants } from "@/lib/animations";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { ArrowRight, Mail, Github, Instagram } from "lucide-react";
 
 /**
- * Design: Warm Editorial
+ * Design: Warm Editorial + Kinetic Editorial Animations
  * - Asymmetric layout with generous whitespace
  * - Warm terracotta brand color with gold accents
- * - Smooth animations and intentional interactions
+ * - Smooth entrance animations and scroll reveals
  * - Editorial grid structure with breathing room
  */
 
@@ -110,6 +113,9 @@ const NEWS_ITEMS = [
 ];
 
 export default function Home() {
+  const statsRef = useScrollReveal(0.2);
+  const highlightsRef = useScrollReveal(0.2);
+
   return (
     <Layout>
       {/* HERO SECTION */}
@@ -135,28 +141,48 @@ export default function Home() {
         <div className="container-x relative grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7 lg:col-span-7">
             {/* Status badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-3 py-1.5 text-xs font-medium text-ink-soft animate-fade-in">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: ANIMATION_TIMINGS.entrance,
+                ease: ANIMATION_EASING.entrance,
+              }}
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-3 py-1.5 text-xs font-medium text-ink-soft"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
               </span>
               Grade 10 · High Scholar · Open to opportunities
-            </div>
+            </motion.div>
 
             {/* Main heading */}
-            <h1
-              className="mt-8 text-display text-5xl sm:text-6xl md:text-7xl animate-fade-up"
-              style={{ animationDelay: "60ms" }}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: ANIMATION_TIMINGS.entrance,
+                ease: ANIMATION_EASING.entrance,
+                delay: 0.06,
+              }}
+              className="mt-8 text-display text-5xl sm:text-6xl md:text-7xl"
             >
               Clyde
               <br />
               <span className="brand-gradient-text italic font-light">Snyders</span>
-            </h1>
+            </motion.h1>
 
             {/* Description */}
-            <p
-              className="mt-8 max-w-xl text-lg text-ink-soft md:text-xl animate-fade-up"
-              style={{ animationDelay: "180ms" }}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: ANIMATION_TIMINGS.entrance,
+                ease: ANIMATION_EASING.entrance,
+                delay: 0.18,
+              }}
+              className="mt-8 max-w-xl text-lg text-ink-soft md:text-xl"
             >
               I'm a 16-year-old student from South Africa exploring{" "}
               <span className="text-ink font-medium">coding</span>,{" "}
@@ -164,19 +190,30 @@ export default function Home() {
               <span className="text-ink font-medium">science fairs</span>. This
               is where I bring together my progress, achievements, and the ideas
               I'm building next.
-            </p>
+            </motion.p>
 
             {/* CTA Buttons */}
-            <div
-              className="mt-10 flex flex-wrap items-center gap-3 animate-fade-up"
-              style={{ animationDelay: "300ms" }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: ANIMATION_TIMINGS.entrance,
+                ease: ANIMATION_EASING.entrance,
+                delay: 0.30,
+              }}
+              className="mt-10 flex flex-wrap items-center gap-3"
             >
               <Link
                 to="/projects"
                 className="group inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] hover:shadow-lg"
               >
                 View Projects
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <motion.div
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </motion.div>
               </Link>
               <Link
                 to="/contact"
@@ -184,12 +221,18 @@ export default function Home() {
               >
                 Contact me
               </Link>
-            </div>
+            </motion.div>
 
             {/* Social links */}
-            <div
-              className="mt-10 flex items-center gap-5 text-ink-soft animate-fade-up"
-              style={{ animationDelay: "400ms" }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: ANIMATION_TIMINGS.entrance,
+                ease: ANIMATION_EASING.entrance,
+                delay: 0.40,
+              }}
+              className="mt-10 flex items-center gap-5 text-ink-soft"
             >
               <a
                 href="mailto:clydesnyders17@gmail.com"
@@ -219,14 +262,20 @@ export default function Home() {
               <span className="font-mono text-xs uppercase tracking-widest">
                 Coding · Robotics · Science
               </span>
-            </div>
+            </motion.div>
           </div>
 
           {/* Workspace illustration */}
           <div className="md:col-span-5 lg:col-span-5">
-            <div
-              className="relative mx-auto max-w-md md:max-w-none animate-fade-up"
-              style={{ animationDelay: "240ms" }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: ANIMATION_TIMINGS.entrance,
+                ease: ANIMATION_EASING.entrance,
+                delay: 0.24,
+              }}
+              className="relative mx-auto max-w-md md:max-w-none"
             >
               <div
                 aria-hidden
@@ -236,123 +285,168 @@ export default function Home() {
                     "linear-gradient(135deg, color-mix(in oklab, var(--brand) 25%, transparent), color-mix(in oklab, var(--gold) 20%, transparent))",
                 }}
               />
-              <div className="relative overflow-hidden rounded-[2rem] border border-border bg-white shadow-lg">
-                <img
+              <motion.div
+                className="relative overflow-hidden rounded-[2rem] border border-border bg-white shadow-lg"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.img
                   src="/manus-storage/clyde-workspace_ffff798c.png"
                   alt="Clyde Snyders - Coding, Robotics, and Building"
                   width={1200}
                   height={1200}
                   className="h-full w-full object-cover"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{
+                    duration: ANIMATION_TIMINGS.float,
+                    ease: "easeInOut" as const,
+                    repeat: Infinity,
+                  }}
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* STATS STRIP */}
-      <section className="border-y border-border bg-surface">
-        <div className="container-x grid grid-cols-2 divide-x divide-border md:grid-cols-4">
-          {STATS.map((s) => (
-            <div key={s.label} className="px-4 py-8 text-center md:py-10">
-              <p className="text-display text-4xl md:text-5xl">{s.value}</p>
-              <p className="mt-2 font-mono text-xs uppercase tracking-widest text-ink-soft">
-                {s.label}
-              </p>
-            </div>
+      {/* STATS SECTION */}
+      <section ref={statsRef.ref} className="container-x py-16 md:py-24">
+        <motion.div
+          initial="hidden"
+          animate={statsRef.isVisible ? "visible" : "hidden"}
+          variants={containerVariants}
+          className="grid grid-cols-2 gap-6 md:grid-cols-4"
+        >
+          {STATS.map((stat, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="rounded-2xl border border-border bg-surface-elevated p-6 text-center"
+            >
+              <div className="text-display text-3xl md:text-4xl font-bold text-brand">
+                {stat.value}
+              </div>
+              <div className="mt-2 text-xs uppercase tracking-widest text-ink-soft">
+                {stat.label}
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* HIGHLIGHTS SECTION */}
-      <section className="container-x py-24 md:py-32">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <p className="text-eyebrow">Selected highlights</p>
-            <h2 className="mt-4 text-display text-4xl md:text-5xl">
+      <section ref={highlightsRef.ref} className="container-x py-16 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={highlightsRef.isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{
+            duration: ANIMATION_TIMINGS.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal,
+          }}
+        >
+          <div className="mb-12">
+            <h2 className="text-display text-4xl md:text-5xl font-bold mb-4">
               Recent
               <br />
               <span className="italic font-light">milestones.</span>
             </h2>
-            <p className="mt-6 text-ink-soft">
-              A snapshot of what I've been working on. The full story lives in
-              Achievements.
+            <p className="text-lg text-ink-soft max-w-2xl">
+              A snapshot of what I've been working on. The full story lives in Achievements.
             </p>
-            <Link
-              to="/achievements"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-brand hover:gap-3 transition-all"
-            >
-              See all achievements <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
 
-          <div className="md:col-span-8">
-            <ul className="space-y-3">
-              {HIGHLIGHTS.map((h, i) => (
-                <li
-                  key={h.title}
-                  className="surface-card group flex items-center gap-6 p-6 hover:[&]:surface-card-hover"
-                  style={{ animationDelay: `${i * 80}ms` }}
-                >
-                  <span className="font-mono text-xs uppercase tracking-widest text-brand">
-                    {h.year}
-                  </span>
-                  <div className="flex-1">
-                    <h3 className="text-display text-2xl">{h.title}</h3>
-                    <p className="mt-1 text-sm text-ink-soft">{h.detail}</p>
+          <motion.div
+            initial="hidden"
+            animate={highlightsRef.isVisible ? "visible" : "hidden"}
+            variants={containerVariants}
+            className="space-y-6"
+          >
+            {HIGHLIGHTS.map((highlight, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group rounded-2xl border border-border bg-surface-elevated p-6 md:p-8 hover:border-brand/50 transition-all hover:shadow-lg"
+              >
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-mono text-brand mb-2">{highlight.year}</div>
+                    <h3 className="text-xl md:text-2xl font-bold text-ink mb-2">
+                      {highlight.title}
+                    </h3>
+                    <p className="text-ink-soft">{highlight.detail}</p>
                   </div>
-                  <ArrowRight className="hidden h-5 w-5 text-ink-soft transition-all group-hover:translate-x-1 group-hover:text-brand md:block" />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+                  <ArrowRight className="h-5 w-5 text-brand flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={highlightsRef.isVisible ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-10"
+          >
+            <Link
+              to="/achievements"
+              className="inline-flex items-center gap-2 text-brand font-medium hover:gap-3 transition-all"
+            >
+              See all achievements
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* GALLERY SECTION */}
-      <section id="gallery" className="container-x py-24 md:py-32">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <p className="text-eyebrow">Visual journey</p>
-            <h2 className="mt-4 text-display text-4xl md:text-5xl">
+      <section id="gallery" className="container-x py-16 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: ANIMATION_TIMINGS.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal,
+          }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <div className="mb-12">
+            <h2 className="text-display text-4xl md:text-5xl font-bold mb-4">
               Moments
               <br />
               <span className="italic font-light">that matter.</span>
             </h2>
-            <p className="mt-6 text-ink-soft">
+            <p className="text-lg text-ink-soft max-w-2xl">
               Photos from competitions, hackathons, and team events. Click any image to view in full size.
             </p>
           </div>
-          <div className="md:col-span-8">
-            <Gallery images={GALLERY_IMAGES} />
-          </div>
-        </div>
+          <Gallery images={GALLERY_IMAGES} />
+        </motion.div>
       </section>
 
-      {/* NEWS & MENTIONS SECTION */}
-      <section id="news" className="container-x py-24 md:py-32 border-t border-border">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <p className="text-eyebrow">In the news</p>
-            <h2 className="mt-4 text-display text-4xl md:text-5xl">
+      {/* NEWS SECTION */}
+      <section id="news" className="container-x py-16 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: ANIMATION_TIMINGS.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal,
+          }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <div className="mb-12">
+            <h2 className="text-display text-4xl md:text-5xl font-bold mb-4">
               Press &
               <br />
               <span className="italic font-light">mentions.</span>
             </h2>
-            <p className="mt-6 text-ink-soft">
+            <p className="text-lg text-ink-soft max-w-2xl">
               Coverage and features about my work in robotics, competitions, and innovation.
             </p>
           </div>
-          <div className="md:col-span-8">
-            <div className="rounded-lg border-2 border-dashed border-border bg-surface-elevated p-12 text-center">
-              <p className="text-lg text-ink-soft">Coming soon...</p>
-              <p className="mt-2 text-sm text-ink-soft">I'm curating the best coverage and mentions of my work. Check back soon!</p>
-            </div>
-          </div>
-        </div>
+          <NewsMentions items={NEWS_ITEMS} />
+        </motion.div>
       </section>
-
-
     </Layout>
   );
 }
