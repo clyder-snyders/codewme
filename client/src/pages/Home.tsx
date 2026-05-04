@@ -259,7 +259,7 @@ export default function Home() {
                 transition={{ duration: 0.3 }}
               >
                 <motion.img
-                  src="/manus-storage/clyde-workspace_efab139f.png"
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663452447906/oN63drPHpvEQvbUAiMNbHR/hero-workspace-b8v2MybsDwj3ttdm9VB3EK.webp"
                   alt="Clyde Snyders - Coding, Robotics, and Building"
                   width={1200}
                   height={1200}
