@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
-import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants } from "@/lib/animations";
+import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants, tagBounceVariants } from "@/lib/animations";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 /**
@@ -91,15 +91,15 @@ export default function About() {
                         },
                       }}
                     >
-                      {skillGroup.items.map((skill) => (
+                      {skillGroup.items.map((skill, skillIndex) => (
                         <motion.span
                           key={skill}
-                          className="px-4 py-2 rounded-full bg-brand/10 text-brand font-medium text-sm hover:bg-brand/20 transition-colors"
-                          variants={{
-                            hidden: { opacity: 0, scale: 0.8 },
-                            visible: { opacity: 1, scale: 1 },
-                          }}
-                          whileHover={{ scale: 1.05 }}
+                          className="px-4 py-2 rounded-full bg-brand/10 text-brand font-medium text-sm hover:bg-brand/20 transition-colors cursor-pointer"
+                          custom={skillIndex}
+                          initial="hidden"
+                          animate={skillsRef.isVisible ? "visible" : "hidden"}
+                          variants={tagBounceVariants}
+                          whileHover={{ scale: 1.1, rotate: 2 }}
                           transition={{ duration: ANIMATION_TIMINGS.hover }}
                         >
                           {skill}

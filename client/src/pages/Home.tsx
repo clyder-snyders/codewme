@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import Gallery from "@/components/Gallery";
-import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants } from "@/lib/animations";
+import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants, arrowDanceVariants, statusPulseVariants, socialSpinVariants } from "@/lib/animations";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowRight, Mail, Github, Instagram } from "lucide-react";
 
@@ -110,7 +110,7 @@ export default function Home() {
           <div className="md:col-span-7 lg:col-span-7">
             {/* Status badge */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: ANIMATION_TIMINGS.entrance,
@@ -118,10 +118,10 @@ export default function Home() {
               }}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-3 py-1.5 text-xs font-medium text-ink-soft"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
+              <motion.span className="relative flex h-2 w-2" variants={statusPulseVariants} animate="animate">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-brand opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
-              </span>
+              </motion.span>
               Grade 10 · High Scholar · Open to opportunities
             </motion.div>
 
@@ -177,8 +177,9 @@ export default function Home() {
               >
                 View Projects
                 <motion.div
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
+                  initial="initial"
+                  whileHover="hover"
+                  variants={arrowDanceVariants}
                 >
                   <ArrowRight className="h-4 w-4" />
                 </motion.div>
@@ -202,31 +203,40 @@ export default function Home() {
               }}
               className="mt-10 flex items-center gap-5 text-ink-soft"
             >
-              <a
+              <motion.a
                 href="mailto:clydesnyders17@gmail.com"
                 aria-label="Email"
                 className="transition-colors hover:text-brand"
+                initial="initial"
+                whileHover="hover"
+                variants={socialSpinVariants}
               >
                 <Mail className="h-5 w-5" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="https://github.com/clyder-snyders"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 className="transition-colors hover:text-brand"
+                initial="initial"
+                whileHover="hover"
+                variants={socialSpinVariants}
               >
                 <Github className="h-5 w-5" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="https://www.instagram.com/clyde.snyders?igsh=aDRxZTF5MG5rdzQy"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="transition-colors hover:text-brand"
+                initial="initial"
+                whileHover="hover"
+                variants={socialSpinVariants}
               >
                 <Instagram className="h-5 w-5" />
-              </a>
+              </motion.a>
               <span className="font-mono text-xs uppercase tracking-widest">
                 Coding · Robotics · Science
               </span>

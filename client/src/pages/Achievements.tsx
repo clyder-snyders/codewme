@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Award, Trophy } from "lucide-react";
 import Layout from "@/components/Layout";
-import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants } from "@/lib/animations";
+import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants, timelineDotVariants } from "@/lib/animations";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 /**
@@ -106,7 +106,10 @@ export default function Achievements() {
                 {/* Timeline dot with animation */}
                 <motion.div
                   className="absolute left-0 top-1 w-6 h-6 rounded-full bg-brand flex items-center justify-center ring-4 ring-background"
+                  initial="initial"
+                  animate="animate"
                   whileHover={{ scale: 1.2 }}
+                  variants={timelineDotVariants}
                   transition={{ duration: ANIMATION_TIMINGS.hover }}
                 >
                   <Icon className="h-3 w-3 text-white" />

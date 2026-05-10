@@ -1,6 +1,8 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { motion } from "framer-motion";
+import { navUnderlineVariants } from "@/lib/animations";
 
 /**
  * Design: Warm Editorial
@@ -86,18 +88,25 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              onClick={(e) => handleNavClick(item.href, e)}
-              className={`text-sm font-medium transition-colors ${
-                isActive(item.href)
-                  ? "text-brand"
-                  : "text-ink-soft hover:text-ink"
-              }`}
-            >
-              {item.label}
-            </Link>
+            <motion.div key={item.href} className="relative">
+              <Link
+                to={item.href}
+                onClick={(e) => handleNavClick(item.href, e)}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(item.href)
+                    ? "text-brand"
+                    : "text-ink-soft hover:text-ink"
+                }`}
+              >
+                {item.label}
+              </Link>
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand"
+                initial="initial"
+                whileHover="hover"
+                variants={navUnderlineVariants}
+              />
+            </motion.div>
           ))}
         </nav>
 
@@ -120,18 +129,19 @@ export default function Header() {
         <nav className="md:hidden border-t border-border bg-surface">
           <div className="container-x py-4 space-y-3">
             {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={(e) => handleNavClick(item.href, e)}
-                className={`block px-4 py-2 rounded-lg transition-colors ${
-                  isActive(item.href)
-                    ? "bg-brand/10 text-brand font-medium"
-                    : "text-ink-soft hover:bg-surface-elevated"
-                }`}
-              >
-                {item.label}
-              </Link>
+              <motion.div key={item.href} whileHover={{ x: 4 }}>
+                <Link
+                  to={item.href}
+                  onClick={(e) => handleNavClick(item.href, e)}
+                  className={`block px-4 py-2 rounded-lg transition-colors ${
+                    isActive(item.href)
+                      ? "bg-brand/10 text-brand font-medium"
+                      : "text-ink-soft hover:bg-surface-elevated"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </motion.div>
             ))}
           </div>
         </nav>

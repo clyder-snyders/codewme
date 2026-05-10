@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { ANIMATION_TIMINGS, ANIMATION_EASING } from "@/lib/animations";
+import { ANIMATION_TIMINGS, ANIMATION_EASING, galleryGlowVariants } from "@/lib/animations";
 
 /**
  * Design: Warm Editorial + Kinetic Editorial Animations
@@ -97,8 +97,9 @@ export default function Gallery({ images }: GalleryProps) {
                 src={image.src}
                 alt={image.caption}
                 className="h-full w-full object-cover"
-                whileHover={{ scale: 1.08 }}
-                transition={{ duration: ANIMATION_TIMINGS.hover }}
+                initial="initial"
+                whileHover="hover"
+                variants={galleryGlowVariants}
               />
               {/* Overlay */}
               <motion.div
