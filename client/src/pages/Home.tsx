@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import Gallery from "@/components/Gallery";
+import VideoPlayer from "@/components/VideoPlayer";
 import { ANIMATION_TIMINGS, ANIMATION_EASING, containerVariants, itemVariants, arrowDanceVariants, statusPulseVariants, socialSpinVariants } from "@/lib/animations";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowRight, Mail, Github, Instagram } from "lucide-react";
@@ -373,6 +374,35 @@ export default function Home() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
+        </motion.div>
+      </section>
+
+      {/* VIDEO SHOWCASE SECTION */}
+      <section className="container-x py-16 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: ANIMATION_TIMINGS.scrollReveal,
+            ease: ANIMATION_EASING.scrollReveal,
+          }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <div className="mb-12">
+            <h2 className="text-display text-4xl md:text-5xl font-bold mb-4">
+              My
+              <br />
+              <span className="italic font-light">journey in motion.</span>
+            </h2>
+            <p className="text-lg text-ink-soft max-w-2xl">
+              A visual showcase of my robotics projects, competitions, and achievements. Watch my journey unfold.
+            </p>
+          </div>
+          <VideoPlayer
+            src="/manus-storage/495527_042841a2.mp4"
+            title="Clyde Snyders - Robotics & Innovation Reel"
+            description="From FIRST Global Robotics to hackathons and science fairs, this reel captures my passion for coding, robotics, and innovation."
+          />
         </motion.div>
       </section>
 
